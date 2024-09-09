@@ -54,7 +54,7 @@ remove() {
         export REMOVE_TOKEN=$(echo $payload | jq .token --raw-output)
     fi
 
-    ./config.sh remove --unattended --token "${REMOVE_TOKEN}"
+    ./config.sh remove --token "${REMOVE_TOKEN}"
 }
 
 trap 'remove; exit 130' INT
