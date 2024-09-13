@@ -1,5 +1,4 @@
-ARG ARCH=amd64
-FROM --platform=${ARCH} debian:bookworm-slim
+FROM debian:bookworm-slim
 
 ENV GITHUB_PAT ""
 ENV GITHUB_TOKEN ""

@@ -20,6 +20,9 @@ spec:
       containers:
       - name: github-runner-arm64
         image: sebas:5000/github-runner:arm64-1
+        securityContext:
+          privileged: true
+          runAsUser: 1000
         env:
         - name: GITHUB_OWNER
           value: koditoriet
@@ -55,6 +58,9 @@ spec:
       containers:
       - name: github-runner-amd64
         image: sebas:5000/github-runner:amd64-1
+        securityContext:
+          privileged: true
+          runAsUser: 1000
         env:
         - name: GITHUB_OWNER
           value: koditoriet
