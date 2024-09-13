@@ -1,0 +1,28 @@
+name: Build and push container
+on:
+  push:
+    branches:
+    - main
+jobs:
+    build-and-push-arm64:
+        name: Build and push ARM64 container
+        runs-on: [self-hosted, arm64]
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@v4
+            - run: |
+                VER_LINE="$(grep 'image: sebas:5000/github-runner:arm64' deployment.yml)"
+                VER="$(echo "$VER_LINE"| sed -e 's/\s\+image: sebas:5000\/github-runner:arm64-\(.\)/\1/')"
+                podman build --platform linux/arm64 --build-arg ARCH=arm64 sebas:5000/github-runner:arm64-$VER
+                podman push sebas:5000/github-runner:arm64-$VER
+    build-and-push-amd64:
+        name: Build and push AMD64 container
+        runs-on: [self-hosted, x64]
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@v4
+            - run: |
+                VER_LINE="$(grep 'image: sebas:5000/github-runner:amd64' deployment.yml)"
+                VER="$(echo "$VER_LINE"| sed -e 's/\s\+image: sebas:5000\/github-runner:amd64-\(.\)/\1/')"
+                podman build --platform linux/amd64 --build-arg ARCH=amd64 sebas:5000/github-runner:amd64-$VER
+                podman push sebas:5000/github-runner:amd64-$VER
