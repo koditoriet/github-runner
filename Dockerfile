@@ -1,4 +1,5 @@
-FROM debian:bookworm-slim
+ARG ARCH=amd64
+FROM --platform=${ARCH} debian:bookworm-slim
 
 ENV GITHUB_PAT ""
 ENV GITHUB_TOKEN ""
@@ -25,7 +26,8 @@ USER github
 WORKDIR /home/github
 
 RUN GITHUB_RUNNER_VERSION=$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | jq -r '.tag_name[1:]') \
-    && curl -Ls https://github.com/actions/runner/releases/download/v${GITHUB_RUNNER_VERSION}/actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz | tar xz \
+    && ARCH=$([ "$(uname -m)" = "x86_64" ] && echo "x64" || echo "arm64") \
+    && curl -Ls https://github.com/actions/runner/releases/download/v${GITHUB_RUNNER_VERSION}/actions-runner-linux-${ARCH}-${GITHUB_RUNNER_VERSION}.tar.gz | tar xz \
     && sudo ./bin/installdependencies.sh
 
 COPY --chown=github:github entrypoint.sh runsvc.sh ./
