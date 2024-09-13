@@ -1,3 +1,5 @@
+[![Build and push container](https://github.com/koditoriet/github-runner/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/koditoriet/github-runner/actions/workflows/build-and-push.yml)
+
 # Github self-hosted runner Dockerfile and Kubernetes configuration
 
 [![awesome-runners](https://img.shields.io/badge/listed%20on-awesome--runners-blue.svg)](https://github.com/jonico/awesome-runners)
