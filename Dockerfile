@@ -7,6 +7,8 @@ ENV GITHUB_REPOSITORY ""
 ENV RUNNER_WORKDIR "_work"
 ENV RUNNER_LABELS ""
 ENV ADDITIONAL_PACKAGES ""
+ENV REGISTRY_USERNAME ""
+ENV REGISTRY_PASSWORD ""
 
 RUN apt-get update \
     && apt-get install -y \
@@ -14,6 +16,9 @@ RUN apt-get update \
         sudo \
         git \
         jq \
+        podman \
+        gcc \
+        make \
         iputils-ping \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
