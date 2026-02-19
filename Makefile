@@ -1,4 +1,4 @@
-VERSION = 5
+VERSION = 6
 REGISTRY = registry.koditoriet.se
 IMAGE = github-runner:${VERSION}
 IMAGE_FULL = ${REGISTRY}/${IMAGE}
